@@ -39,10 +39,10 @@ void loop() {
   while(mySerial.available() > 0){
     char c = mySerial.read();
     if(c != a){
-      Serial.println("error!");
+      Serial.print("error!");
       Serial.print("  ;  ");
     }
-    Serial.print(c);
+    Serial.println(c);
   }
   delay(100);
 }
