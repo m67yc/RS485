@@ -2,20 +2,24 @@
 
 #define buttonPin 13
 SoftwareSerial RS485(2, 3);
-bool error;
 long int delaySec = 350;
+
 void setup() {
+
   Serial.begin(9600);
   RS485.begin(9600);
   pinMode(buttonPin, INPUT_PULLUP);
+
 }
 
 void loop() {
+
   long int success_count;
   long int error_count;
-  int success_rate = error_count/(success_count+error_count)*100;
+  int success_rate = error_count / (success_count + error_count) * 100;
   char returnVal;
   char inputVal;
+
   if (digitalRead(buttonPin) == 0) {
     inputVal = 'L';
     RS485.write(inputVal);
@@ -23,16 +27,18 @@ void loop() {
     inputVal = 'D';
     RS485.write(inputVal);
   }
+
   returnVal = RS485.read();
   Serial.print(returnVal);
   Serial.print(" : ");
   Serial.println(inputVal);
+
   long int timer = millis();
-  if(timer - millis() >= delaySec){
-  if (returnVal != inputVal){
-     Serial.println("Error detected!");
-     error_count++;
-  }else
-    success_count++;
+  if (timer - millis() >= delaySec) {
+    if (returnVal != inputVal) {
+      Serial.println("Error detected!");
+      error_count++;
+    } else
+        success_count++; 
   }
 }
