@@ -9,14 +9,15 @@ void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
 }
 
+long int success_count = 0;
+long int error_count = 0;
+int success_rate;
+char returnVal;
+char inputVal;
+
 void loop() {
-  
-  long int success_count;
-  long int error_count;
-  int success_rate;
-  char returnVal;
-  char inputVal;
-  
+
+
   if (digitalRead(buttonPin) == 0) {
     inputVal = 'L';
     RS485.write(inputVal);
@@ -26,21 +27,20 @@ void loop() {
   }
 
   returnVal = RS485.read();
-  if(returnVal != intputVal)
+  if (returnVal != inputVal)
     error_count++;
   else
     success_count++;
-  success_rate = error_count / (success_count + error_count) * 100;
+  success_rate = success_count / (success_count + error_count) * 100;
 
   Serial.print(returnVal);
   Serial.print(" : ");
   Serial.print(inputVal);
-  Serial.print(" ; ");
+  Serial.print("   ;   ");
   Serial.print(error_count);
   Serial.print("-");
   Serial.print(success_count);
   Serial.print(":  ");
   Serial.print(success_rate);
   Serial.println("%");
-  
 }
