@@ -6,32 +6,31 @@ bool read = 0;
 String message = "";
 
 void setup() {
-  
+
   Serial.begin(9600);
   RS485.begin(9600);
   pinMode(ledPin, OUTPUT);
-  
 }
 
 void loop() {
-  
+
   while (RS485.available() > 0) {
     char receivedVal = RS485.read();
-    
+
     if (read == 1) {
-      
+
       if (receivedVal == '>') {
         Serial.println(message);
+        message = "";
         read = 0;
+        break;
       }
-      
+
       message += receivedVal;
     }
+
     if (receivedVal == '<') {
-      message = "";
       read = 1;
     }
-    
   }
-  
 }
