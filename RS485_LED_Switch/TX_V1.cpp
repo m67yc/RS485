@@ -10,11 +10,9 @@ void setup() {
 }
 
 void loop() {
-  long int success_count;
-  long int error_count;
-  int success_rate = error_count / (success_count + error_count) * 100;
   char returnVal;
   char inputVal;
+  
   if (digitalRead(buttonPin) == 0) {
     inputVal = 'L';
     RS485.write(inputVal);
