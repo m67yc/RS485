@@ -31,7 +31,7 @@ void loop() {
     error_count++;
   else
     success_count++;
-  success_rate = success_count / (success_count + error_count) * 100;
+  success_rate = (success_count * 100) / (success_count + error_count);
 
   Serial.print(returnVal);
   Serial.print(" : ");
