@@ -23,7 +23,7 @@ void loop() {
   Serial3.write(inputVal);
   Serial3.write('>');
 
-  while (!Serial3.available()) {
+  // while (!Serial3.available()) {
   //   Serial.println("no");
   //   if (inputVal == 'L') {
   //     Serial3.write("<L>");
@@ -31,7 +31,8 @@ void loop() {
   //     Serial3.write("<D>");
   //   }
   //   delay(10);
-  }
+  // }
+  delay(5);
   returnVal = Serial3.read();
   time2 = micros();
   Serial.print("    ");
